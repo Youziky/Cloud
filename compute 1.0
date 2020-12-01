@@ -1,0 +1,60 @@
+import java.util.Random;
+public class Formula {
+	public  int operand1; 
+	public  int operand2; 
+    public char operator;
+	public void setOperand1(){
+		Random random = new Random();
+		operand1=random.nextInt(100);
+	}
+	public void setOperator(int flag){//flag=2:纯加法计算；flag=-2:纯减法计算；flag=1:偏加法运算；flag=-1:偏减法运算；flag=0:正常混合。
+		Random random = new Random();
+		String operatorList = "+-+-+--";
+		int getOperator;
+		if(flag==2)
+			getOperator=0;
+		else if(flag==-2)
+			getOperator=1;
+		else if(flag==1) 
+			getOperator=random.nextInt(5);
+		else if(flag==-1)
+			getOperator=random.nextInt(7);
+		else
+			getOperator=random.nextInt(2);
+		if(flag<-2||flag>2)
+			System.out.println("运算符号生成异常！");
+		else
+			operator=operatorList.charAt(getOperator);
+	}
+	public void setOperand2(){
+		Random random = new Random();
+		if(operator=='+') 
+			operand2 = random.nextInt(101-operand1);
+		else if(operator=='-') 
+			operand2 = random.nextInt(operand1+1);
+		else 
+			System.out.println("未能正常得到操作数2!");
+	}
+	public int getOperand1(){
+		return operand1;
+	}
+	public int getOperand2(){
+		return operand2;
+	}
+	public char getOperator(){
+		return operator;
+	}
+	public String toString() {
+		return operand1+""+operator+""+operand2+"=";
+	}
+	//public static void Formula() {
+		//Formula.
+	//}
+	public static void main(String[] args) {
+		Formula f = new Formula();
+		f.setOperand1();
+		f.setOperator(1);
+		f.setOperand2();
+		System.out.println(f.toString());
+	}
+}
